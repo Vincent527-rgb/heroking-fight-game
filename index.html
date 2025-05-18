@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knights fight</title>
+  <!-- ---- Links fonts - Comfortaa, Righteous, REM, EB Garamond, Libre Baskerville, Quintessential and Twinkle Star + Nosifer---- -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Quintessential&family=REM:ital,wght@0,100..900;1,100..900&family=Righteous&family=Twinkle+Star&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+  
+  <!-- ---- Links to files -->
+  <link rel="stylesheet" href="styles/styles.min.css">
+  <script defer src="./scripts/main.js"></script>
+
+  <!-- ---- Link font awesome ---- -->
+  <script src="https://kit.fontawesome.com/338ba07762.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- ==== HEADER ==== -->
+  <header>
+    <h1>
+      <img width="96" height="96" src="https://img.icons8.com/color/96/samurai-helmet.png" alt="samurai-helmet"/>
+      <!-- H et G avec des ailes => &#xE01F; &#xE032; -->
+      <span>HE&#xE153;&#xE150; &#xE1BA;ING</span>
+      <img width="96" height="96" src="https://img.icons8.com/color/96/samurai-helmet.png" alt="samurai-helmet"/>
+    </h1>
+  </header>
+
+  <!-- ==== MAIN ==== -->
+  <main>
+    <!-- ---- BG video ---- -->
+    <video src="./img/10.mp4" autoplay muted loop></video>
+
+    <!-- ---- Build your hero ---- -->
+    <form action="#" class="hero-build">
+      <h2>Build your hero</h2>
+      <label for="name">Name of your character:</label>
+      <input type="text" id="name" placeholder="Hero's name" required>
+
+      <label for="class-character">Class:</label>
+      <select name="class-character" id="class-character">
+        <option value="" disabled>Choose your class</option>
+        <option value="warrior">Warrior</option>
+        <option value="mage">Mage</option>
+      </select>
+      <div class="class-character-info"></div>
+      
+      <label for="race-character">Race:</label>
+      <select name="race-character" id="race-character">
+        <option value="" disabled>Choose your race</option>
+        <option value="human">Human</option>
+        <option value="dwarf">Dwarf</option>
+        <option value="elf">Elf</option>
+        <option value="druid">Druid</option>
+        <option value="orc">Orc</option>
+        <option value="gobelin">Gobelin</option>
+        <option value="giant">Giant</option>
+      </select>
+      <button class="add-btn btn">Create player</button>
+    </form>
+
+    <!-- ---- Display your hero ---- -->
+    <div class="heroes">
+      <h2>Heroes available</h2>
+      <div class="list-player">
+        <div class="character-card">No player logged in.</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <h1>Forge of a Hero</h1>
+    <!-- ---- Fighting arena ---- -->
+    <form action="#" class="opponents-controls">
+      <select name="attacker" id="attacker">
+        <option value="">Choose an attacker</option>
+      </select>
+      <img width="64" height="64" src="https://img.icons8.com/external-microdots-premium-microdot-graphic/64/external-katana-japan-microdots-premium-microdot-graphic.png" alt="external-katana-japan-microdots-premium-microdot-graphic"/>
+      <select name="defender" id="defender">
+        <option value="">Choose a defender</option>
+      </select>
+    </form>
+
+    <div class="gameplay">
+      <div class="your-player">
+        <h2>Your player</h2>
+        <div class="your-player__card-status" title="Player status"></div>
+        <form action="#" class="your-player__fight-controls">
+          <select name="attack-type" id="attack-type">
+            <option value="" disabled>Choose the type of attack</option>
+            <option value="swords">Swords</option>
+            <option value="magic">Magic</option>
+          </select>
+          <button class="attack-btn btn">Attack</button>
+        </form>
+        <h3>Your fighter say:</h3>
+        <div class="your-player__dialog" title="Dialog box"></div>
+      </div>
+      <div class="arena">
+        <video class="video-arena" src="./img/samurai-autumn-wallpaperwaifu-com.mp4" autoplay muted loop></video>
+      </div>
+      <div class="your-ennemy">
+        <h2>Your ennemy</h2>
+        <div class="your-ennemy__card-status" title="Player status"></div>
+        <h3>Your ennemy say:</h3>
+        <div class="your-ennemy__dialog" title="Dialog box"></div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

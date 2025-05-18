@@ -1,0 +1,61 @@
+@use "../abstracts/" as *;
+
+h2 {
+    font-family: "Quintessential";
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: $yellow-medium;
+}
+h3 {
+    font-size: 1.6rem;
+}
+.character-card {
+    padding: 2rem;
+    color: $main-dark;
+    border: 2px ridge #e92f3e;
+    background-color: #e92f3f2d;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__strength, &__magic, &__mana, &__potions, &__hp {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__name {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        text-transform: capitalize;
+        font-weight: 800;
+        border-bottom: 1px solid $main-dark;
+        border-radius: 1rem;
+    }
+    &__hp-bar {
+        height: 1.5rem;
+        width: 70%;
+        margin-top: 1rem;
+        border-radius: 3rem;
+        border: 1px solid $main-dark;
+
+        &-bg-green {
+            width: 100%;
+            height: 1.5rem;
+            border-radius: 3rem;
+            background: linear-gradient(to right, $main-dark, #0f9b0f);
+            transition: width 0.3s ease;
+        }
+    }
+}
+
+.highlight, .highlight-blue {
+    font-weight: 800;
+    text-transform: capitalize;
+    color: $red-dark;
+}
+.highlight-blue {
+    color: $blue-dark;
+}

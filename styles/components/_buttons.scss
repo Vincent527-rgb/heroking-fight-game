@@ -1,0 +1,41 @@
+@use "../abstracts/" as *;
+
+.btn {
+    width: fit-content;
+    padding: 1rem 3rem;
+    border-radius: 3rem;
+    border: 0;
+    align-self: center;
+    margin: 1rem 0;
+    transition: .3s all ease-in-out;
+    @media screen and (min-width:960px) {
+        margin: 0;
+    }
+
+    &:hover {
+        background-color: $yellow-medium;
+        box-shadow: 0 0 5px 3px rgba(0,0,0,0.25);
+    }
+}
+.delete-btn {
+    width: 70%;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+
+    &:hover:after {
+        content: attr(data-title);
+        width: 100%;
+        font-size: 1.6rem;
+        background-color: $white-medium;
+        border: 1px solid $main-darker;
+        border-radius: 1rem;
+        display: block;
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        z-index: 100;
+        opacity: .6;
+    }
+}
