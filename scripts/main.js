@@ -41,8 +41,15 @@ class Knight {
         }
     }
     attack(attacker, defender) {
-        const damage = attacker.strength * Math.random().toFixed(0);
-        defender.hp = Math.max(defender.hp-damage, 0);
+        // Calculer dégat
+        let damage          = attacker.strength * Math.random().toFixed(0);
+        let isCritical      = Math.random() < 0.1;
+        let criticalIndex   = isCritical ? 2 : 1;
+        let totalDamage     = damage * criticalIndex;
+
+
+        // Appliquer dégats
+        defender.hp = Math.max(defender.hp-totalDamage, 0);
 
         // Mettre à jour les cartes
         yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> <div>${defender.hp}</div>`;
@@ -51,7 +58,12 @@ class Knight {
         const hpPercentage = (defender.hp / 100) * 100;
         hpBar.style.width = `${hpPercentage}%`;
 
-        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${damage} points de dégâts !`;
+        // Mettra à jour les dialogues
+        let yourPlayerDialogMessage = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${totalDamage} points de dégâts. `
+        if (isCritical) {
+            yourPlayerDialogMessage += "Coup critique !"
+        }
+        yourPlayerDialog.innerHTML = yourPlayerDialogMessage;
 
         // Vérifier si le défenseur a besoin de prendre une potion
         if (defender.hp < 50 && defender.potions > 0) {
@@ -59,8 +71,13 @@ class Knight {
         }
     }
     counterAttack(attacker, defender) {
-        const damage = defender.strength * Math.random().toFixed(0);
-        attacker.hp = Math.max(attacker.hp-damage, 0);
+        // Calculer dégat
+        let damage          = defender.strength * Math.random().toFixed(0);
+        let isCritical      = Math.random() < 0.1;
+        let criticalIndex   = isCritical ? 2 : 1;
+        let totalDamage     = damage * criticalIndex;
+
+        attacker.hp = Math.max(attacker.hp-totalDamage, 0);
 
         // Mettre à jour les cartes
         yourPlayerCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> <div>${attacker.hp}</div>`;
@@ -69,7 +86,12 @@ class Knight {
         const hpPercentage = (attacker.hp/100) * 100;
         hpBar.style.width = `${hpPercentage}%`;
 
-        yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> attaque <span class="highlight-blue">${attacker.name}</span> et inflige ${damage} points de dégâts !`;
+        // Mettra à jour les dialogues
+        let yourEnnemyDialogMessage = `<span class="highlight">${defender.name}</span> attaque <span class="highlight-blue">${attacker.name}</span> et inflige ${totalDamage} points de dégâts. `;
+        if (isCritical) {
+            yourEnnemyDialogMessage += "Coup critique !"
+        }
+        yourEnnemyDialog.innerHTML = yourEnnemyDialogMessage;
     }
     magicAttack(attacker, defender) {
         if (attacker.mana < 20) {
