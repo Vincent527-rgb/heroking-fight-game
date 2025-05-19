@@ -380,6 +380,23 @@ footer .gameplay .fight-controls button {
   margin-bottom: 2rem;
   margin-left: 2rem;
 }
+footer .gameplay .critical {
+  padding: 1rem;
+  color: #D32F2F;
+  font-size: 2.3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  position: absolute;
+  top: 64%;
+}
+footer .gameplay .your-player__critical {
+  left: 23rem;
+  rotate: -25deg;
+}
+footer .gameplay .your-ennemy__critical {
+  right: 23rem;
+  rotate: 25deg;
+}
 footer .gameplay .dialog {
   width: 30%;
   padding: 5rem;

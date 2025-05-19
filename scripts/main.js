@@ -18,6 +18,7 @@ const yourPlayerCard    = document.querySelector(".your-player__card-status");
 const yourPlayerDialog  = document.querySelector(".your-player__dialog");
 const yourEnnemyCard    = document.querySelector(".your-ennemy__card-status");
 const yourEnnemyDialog  = document.querySelector(".your-ennemy__dialog");
+const arena             = document.querySelector(".arena");
 
 // ==== Variables ====
 const knights = [];
@@ -62,11 +63,16 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         // Mettra à jour les dialogues
-        let yourPlayerDialogMessage = `<span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts. `
+        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts. `
         if (isCritical && totalDamage > 0) {
-            yourPlayerDialogMessage += "Coup critique !"
+            const divYourPlayerCritical = document.createElement("div");
+            divYourPlayerCritical.className = "your-player__critical critical"
+            divYourPlayerCritical.innerHTML = "Coup critique !!!"
+            arena.append(divYourPlayerCritical);
+            setTimeout(() => {
+                arena.prepend(divYourPlayerCritical);
+            }, 2000)
         }
-        yourPlayerDialog.innerHTML = yourPlayerDialogMessage;
         // Faire disparaitre le message
         setTimeout(()=> {
             yourPlayerDialog.innerHTML = "";
@@ -94,11 +100,17 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         // Mettra à jour les dialogues
-        let yourEnnemyDialogMessage = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. `;
+        yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. `;
         if (isCritical && totalDamage > 0) {
-            yourEnnemyDialogMessage += "Coup critique !"
+            const divYourEnnemyCritical = document.createElement("div");
+            divYourEnnemyCritical.className = "your-ennemy__critical critical"
+            divYourEnnemyCritical.innerHTML = "Coup critique !!!"
+            arena.append(divYourEnnemyCritical);
+
+            setTimeout(() => {
+                arena.prepend(divYourEnnemyCritical);
+            }, 2000)
         }
-        yourEnnemyDialog.innerHTML = yourEnnemyDialogMessage;
 
         // Faire disparaitre le message
         setTimeout(()=> {
@@ -130,11 +142,16 @@ class Knight {
         yourPlayerCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${attacker.mana}</div>`;
 
         // Mettra à jour les dialogues
-        let yourPlayerDialogMessage = `<span class="highlight-blue">${attacker.name}</span> &nbsp; attaque <span class="highlight">${defender.name}</span> &nbsp; et inflige ${damage} points de dégâts !`;
+        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts. `
         if (isCritical && totalDamage > 0) {
-            yourPlayerDialogMessage += "Coup critique !"
+            const divYourPlayerCritical = document.createElement("div");
+            divYourPlayerCritical.className = "your-player__critical critical"
+            divYourPlayerCritical.innerHTML = "Coup critique !!!"
+            arena.append(divYourPlayerCritical);
+            setTimeout(() => {
+                arena.prepend(divYourPlayerCritical);
+            }, 2000)
         }
-        yourPlayerDialog.innerHTML = yourPlayerDialogMessage;
 
         // Faire disparaitre le message
         setTimeout(()=> {
@@ -171,11 +188,17 @@ class Knight {
         yourEnnemyCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${defender.mana}</div>`;
 
         // Mettra à jour les dialogues
-        let yourEnnemyDialogMessage = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${damage} points de dégâts !`;
+        yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. `;
         if (isCritical && totalDamage > 0) {
-            yourEnnemyDialogMessage += "Coup critique !"
+            const divYourEnnemyCritical = document.createElement("div");
+            divYourEnnemyCritical.className = "your-ennemy__critical critical"
+            divYourEnnemyCritical.innerHTML = "Coup critique !!!"
+            arena.append(divYourEnnemyCritical);
+
+            setTimeout(() => {
+                arena.prepend(divYourEnnemyCritical);
+            }, 2000)
         }
-        yourEnnemyDialog.innerHTML = yourEnnemyDialogMessage;
 
         // Faire disparaitre le message
         setTimeout(()=> {
