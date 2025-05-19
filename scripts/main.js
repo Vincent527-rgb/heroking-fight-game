@@ -99,6 +99,7 @@ class Knight {
             yourEnnemyDialogMessage += "Coup critique !"
         }
         yourEnnemyDialog.innerHTML = yourEnnemyDialogMessage;
+
         // Faire disparaitre le message
         setTimeout(()=> {
             yourEnnemyDialog.innerHTML = "";
@@ -110,8 +111,13 @@ class Knight {
             return
         }
 
-        const damage = attacker.magic * Math.random().toFixed(0);
-        defender.hp = Math.max(defender.hp-damage, 0);
+        // Calculer dégat
+        let damage = attacker.magic * Math.random().toFixed(0);
+        let isCritical = Math.random() < 0.5;
+        let criticalIndex = isCritical ? 2 : 1;
+        let totalDamage = damage * criticalIndex;
+
+        defender.hp = Math.max(defender.hp-totalDamage, 0);
         attacker.mana -= 20;
 
         // Mettre à jour les cartes
@@ -122,7 +128,14 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         yourPlayerCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${attacker.mana}</div>`;
-        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span> &nbsp; attaque <span class="highlight">${defender.name}</span> &nbsp; et inflige ${damage} points de dégâts !`;  
+
+        // Mettra à jour les dialogues
+        let yourPlayerDialogMessage = `<span class="highlight-blue">${attacker.name}</span> &nbsp; attaque <span class="highlight">${defender.name}</span> &nbsp; et inflige ${damage} points de dégâts !`;
+        if (isCritical && totalDamage > 0) {
+            yourPlayerDialogMessage += "Coup critique !"
+        }
+        yourPlayerDialog.innerHTML = yourPlayerDialogMessage;
+
         // Faire disparaitre le message
         setTimeout(()=> {
             yourPlayerDialog.innerHTML = "";
@@ -139,8 +152,13 @@ class Knight {
             return
         }
 
-        const damage = defender.magic * Math.random().toFixed(0);
-        attacker.hp = Math.max(attacker.hp-damage, 0);
+        // Calculer dégat
+        let damage = defender.magic * Math.random().toFixed(0);
+        let isCritical = Math.random() < 0.5;
+        let criticalIndex = isCritical ? 2 : 1;
+        let totalDamage = damage * criticalIndex;
+
+        attacker.hp = Math.max(attacker.hp-totalDamage, 0);
         defender.mana -= 20;
         
         // Mettre à jour les cartes
@@ -151,7 +169,14 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         yourEnnemyCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${defender.mana}</div>`;
-        yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${damage} points de dégâts !`;
+
+        // Mettra à jour les dialogues
+        let yourEnnemyDialogMessage = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${damage} points de dégâts !`;
+        if (isCritical && totalDamage > 0) {
+            yourEnnemyDialogMessage += "Coup critique !"
+        }
+        yourEnnemyDialog.innerHTML = yourEnnemyDialogMessage;
+
         // Faire disparaitre le message
         setTimeout(()=> {
             yourEnnemyDialog.innerHTML = "";
@@ -753,7 +778,6 @@ potionBtn.addEventListener("click", function (e) {
 
 // todo: créer un délai aux contre-attaques
 // todo: changer la dispo? faire une maquette
-    // Améliorer les boîtes de dialogue ==> bulle arena? mettre petit personnage?
     // Créer des boss sélectionnables dans les defender avec des attaques spéciales
     // Générer automatiquement un nombre aléatoire pour la force et la magie => l'afficher avec ??? pour laisser le mystère
     // Choisir son symbole à la place des races
