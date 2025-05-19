@@ -131,7 +131,7 @@ class Knight {
     }
     magicAttack(attacker, defender) {
         if (attacker.mana < 20) {
-            yourPlayerDialog.innerHTML = `J<div>e suis à cours de mana...mais il me reste la force physique !</div>`;
+            yourPlayerDialog.innerHTML = `<div>Je suis à cours de mana...mais il me reste la force physique !</div>`;
             return
         }
 
