@@ -125,7 +125,7 @@ class Knight {
 
         // Calculer dégat
         let damage = attacker.magic * Math.random().toFixed(0);
-        let isCritical = Math.random() < 0.5;
+        let isCritical = Math.random() < 0.2;
         let criticalIndex = isCritical ? 2 : 1;
         let totalDamage = damage * criticalIndex;
 
@@ -171,7 +171,7 @@ class Knight {
 
         // Calculer dégat
         let damage = defender.magic * Math.random().toFixed(0);
-        let isCritical = Math.random() < 0.5;
+        let isCritical = Math.random() < 0.2;
         let criticalIndex = isCritical ? 2 : 1;
         let totalDamage = damage * criticalIndex;
 
