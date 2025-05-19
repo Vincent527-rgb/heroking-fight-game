@@ -46,11 +46,13 @@
         <option value="" disabled>Choose your class</option>
         <option value="warrior">Warrior</option>
         <option value="mage">Mage</option>
+        <option value="battlemage">Battlemage</option>
+        <option value="cleric">Cleric</option>
       </select>
       <div class="class-character-info"></div>
       
-      <label for="race-character">Race:</label>
-      <select name="race-character" id="race-character">
+      <!-- <label for="race-character">Race:</label> -->
+      <!-- <select name="race-character" id="race-character">
         <option value="" disabled>Choose your race</option>
         <option value="human">Human</option>
         <option value="dwarf">Dwarf</option>
@@ -59,7 +61,7 @@
         <option value="orc">Orc</option>
         <option value="gobelin">Gobelin</option>
         <option value="giant">Giant</option>
-      </select>
+      </select> -->
       <button class="add-btn btn">Create player</button>
     </form>
 
@@ -89,7 +91,10 @@
       <div class="your-player">
         <h2>Your player</h2>
         <div class="your-player__card-status" title="Player status"></div>
-        <form action="#" class="your-player__fight-controls">
+      </div>
+      <div class="arena">
+        <video class="video-arena" src="./img/samurai-autumn-wallpaperwaifu-com.mp4" autoplay muted loop></video>
+        <form action="#" class="fight-controls">
           <select name="attack-type" id="attack-type">
             <option value="">Choose the type of attack</option>
             <option value="swords">Swords</option>
@@ -98,9 +103,6 @@
           <button class="attack-btn btn">Attack</button>
           <button class="potion-btn btn">Take a potion</button>
         </form>
-      </div>
-      <div class="arena">
-        <video class="video-arena" src="./img/samurai-autumn-wallpaperwaifu-com.mp4" autoplay muted loop></video>
         <div class="your-player__dialog dialog" title="Dialog box">Your fighter say:</div>
         <div class="your-ennemy__dialog dialog" title="Dialog box">Your ennemy say:</div>
       </div>

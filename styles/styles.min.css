@@ -170,6 +170,10 @@ h2 {
   opacity: 0.6;
 }
 
+.add-btn {
+  margin-top: 2rem;
+}
+
 header {
   background-color: #333;
   display: flex;
@@ -316,21 +320,6 @@ footer .gameplay .your-player__card-status {
   width: 100%;
   flex-grow: 5;
 }
-footer .gameplay .your-player__fight-controls {
-  display: flex;
-}
-footer .gameplay .your-player__fight-controls select {
-  padding: 0.5rem;
-  margin-bottom: 2rem;
-  width: 30%;
-  border-radius: 1rem;
-  border: 0;
-}
-footer .gameplay .your-player__fight-controls button {
-  padding: 0.5rem 2rem;
-  margin-bottom: 2rem;
-  margin-left: 2rem;
-}
 footer .gameplay .arena {
   margin: 5rem auto;
   max-width: 90%;
@@ -371,6 +360,25 @@ footer .gameplay .arena video {
   height: 100%;
   object-fit: cover;
   border-radius: 1rem;
+}
+footer .gameplay .fight-controls {
+  display: flex;
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  translate: -50% 0;
+}
+footer .gameplay .fight-controls select {
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  width: 30%;
+  border-radius: 1rem;
+  border: 0;
+}
+footer .gameplay .fight-controls button {
+  padding: 0.5rem 2rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
 }
 footer .gameplay .dialog {
   width: 30%;

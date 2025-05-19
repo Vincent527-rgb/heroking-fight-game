@@ -25,13 +25,15 @@ const knights = [];
 // ==== Fonctions ====
 // ~~~~ Build your Hero ~~~~
 class Knight {
-    constructor (name, strength, magic) {
+    constructor (name, strength, magic, mana, potions, hp) {
         this.name       = name;
         this.strength   = strength;
         this.magic      = magic;
-        this.mana       = 50;
-        this.potions    = 2;
-        this.hp         = 100;
+        this.mana       = mana;
+        this.potions    = potions;
+        this.hp         = hp;
+
+        console.log("HP in constructor:", this.hp);
     }
     shout(isAttacker) {
         if (isAttacker) {
@@ -50,6 +52,7 @@ class Knight {
 
         // Appliquer dégats
         defender.hp = Math.max(defender.hp-totalDamage, 0);
+        console.log("HP after attack:", defender.hp);
 
         // Mettre à jour les cartes
         yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> <div>${defender.hp}</div>`;
@@ -180,13 +183,13 @@ class Knight {
         }
     }
 }
-
 // Construire une nouvelle carte personnage
-function addKnight(name, strength, magic) {
+function addKnight(name, strength, magic, mana, potions, hp) {
     if (name === "") {
         alert("Veuillez remplir les champs");
         return;
     }
+    console.log("HP initial:", hp);
 
     // Vérifier si un Knight avec le même nom existe déjà
     const knightExists = knights.some(knight => knight.name === name);
@@ -195,7 +198,7 @@ function addKnight(name, strength, magic) {
         return;
     }
 
-    const newKnight = new Knight(name, strength, magic);
+    const newKnight = new Knight(name, strength, magic, mana, potions, hp);
     knights.push(newKnight);
     addAttacker(newKnight);
     addDefender(newKnight);
@@ -214,6 +217,8 @@ function displayKnights() {
 
     } else {
         knights.forEach((knight, index) => {
+
+            console.log("HP in display:", knight.hp);
             // Création container pour afficher mes card personnage
             const divListCharacter      = document.createElement("div");
             divListCharacter.className  = "character-card";
@@ -346,6 +351,79 @@ function displayClass() {
         tagListClass.append(divClassScoreIntelligence);
         tagListClass.append(divClassInfoConstitution);
         tagListClass.append(divClassScoreConstitution);
+    } else if (selectClass.value === "battlemage") {
+        // Créer mes éléments
+        const divClassInfoStrength          = document.createElement("p");
+        const divClassScoreStrength         = document.createElement("div");
+        const divClassInfoIntelligence      = document.createElement("p");
+        const divClassScoreIntelligence     = document.createElement("div");
+        const divClassInfoConstitution      = document.createElement("p");
+        const divClassScoreConstitution     = document.createElement("div");
+
+        // Ajouter une classe
+        divClassInfoStrength.className      = "info-strength";
+        divClassScoreStrength.className     = "score-strength";
+        divClassInfoIntelligence.className  = "info-intelligence";
+        divClassScoreIntelligence.className = "score-intelligence";
+        divClassInfoConstitution.className  = "info-constitution";
+        divClassScoreConstitution.className = "score-constitution";
+
+        // Insertion contenu
+        divClassInfoStrength.innerHTML      = "Strength:";
+        divClassScoreStrength.innerHTML     = "+3";
+        divClassInfoIntelligence.innerHTML  = "Intelligence";
+        divClassScoreIntelligence.innerHTML = "+3";
+        divClassInfoConstitution.innerHTML  = "Constitution";
+        divClassScoreConstitution.innerHTML = "+10";
+
+        // Insertion des balises dans le container class-character-info
+        tagListClass.append(divClassInfoStrength);
+        tagListClass.append(divClassScoreStrength);
+        tagListClass.append(divClassInfoIntelligence);
+        tagListClass.append(divClassScoreIntelligence);
+        tagListClass.append(divClassInfoConstitution);
+        tagListClass.append(divClassScoreConstitution);
+    } else if (selectClass.value === "cleric") {
+        // Créer mes éléments
+        const divClassInfoStrength          = document.createElement("p");
+        const divClassScoreStrength         = document.createElement("div");
+        const divClassInfoIntelligence      = document.createElement("p");
+        const divClassScoreIntelligence     = document.createElement("div");
+        const divClassInfoConstitution      = document.createElement("p");
+        const divClassScoreConstitution     = document.createElement("div");
+        const divClassInfoPotions           = document.createElement("p");
+        const divClassScorePotions          = document.createElement("div");
+
+        // Ajouter une classe
+        divClassInfoStrength.className      = "info-strength";
+        divClassScoreStrength.className     = "score-strength";
+        divClassInfoIntelligence.className  = "info-intelligence";
+        divClassScoreIntelligence.className = "score-intelligence";
+        divClassInfoConstitution.className  = "info-constitution";
+        divClassScoreConstitution.className = "score-constitution";
+        divClassInfoPotions.className       = "info-potions"
+        divClassScorePotions.className      = "score-potions"
+
+        // Insertion contenu
+        divClassInfoStrength.innerHTML      = "Strength:";
+        divClassScoreStrength.innerHTML     = "+3";
+        divClassInfoIntelligence.innerHTML  = "Intelligence";
+        divClassScoreIntelligence.innerHTML = "+3";
+        divClassInfoConstitution.innerHTML  = "Constitution";
+        divClassScoreConstitution.innerHTML = "+0";
+        divClassInfoPotions.innerHTML       = "Potions"
+        divClassScorePotions.innerHTML      = "+2"
+
+        // Insertion des balises dans le container class-character-info
+        tagListClass.append(divClassInfoStrength);
+        tagListClass.append(divClassScoreStrength);
+        tagListClass.append(divClassInfoIntelligence);
+        tagListClass.append(divClassScoreIntelligence);
+        tagListClass.append(divClassInfoConstitution);
+        tagListClass.append(divClassScoreConstitution);
+        tagListClass.append(divClassInfoPotions);
+        tagListClass.append(divClassScorePotions);
+
     } else {
         tagListClass.textContent = "Veuillez choisir une classe"
     }
@@ -562,19 +640,48 @@ addBtn.addEventListener("click", function (e) {
         const name      = inputname.value;
         let strength    = 15;
         let magic       = 9;
+        let mana        = 40;
+        let potions     = 2;
+        let hp          = 120;
 
-        addKnight(name, strength, magic);
+        addKnight(name, strength, magic, mana, potions, hp);
         displayKnights();
         resetInputs();     
     } else if (selectClass.value === "mage") {
         const name      = inputname.value;
         let strength    = 9;
         let magic       = 15;
+        let mana        = 60;
+        let potions     = 2;
+        let hp          = 100;
 
-        addKnight(name, strength, magic);
+        addKnight(name, strength, magic, mana, potions, hp);
         displayKnights();
         resetInputs();      
-    }    
+    } else if (selectClass.value === "battlemage")    {
+        const name      = inputname.value;
+        let strength    = 13;
+        let magic       = 13;
+        let mana        = 60;
+        let potions     = 2;
+        let hp          = 110;
+
+        addKnight(name, strength, magic, mana, potions, hp);
+        displayKnights();
+        resetInputs();      
+    } else if (selectClass.value === "cleric")    {
+        const name      = inputname.value;
+        let strength    = 13;
+        let magic       = 13;
+        let mana        = 40;
+        let potions     = 4;
+        let hp          = 100;
+
+        addKnight(name, strength, magic, mana, potions, hp);
+        displayKnights();
+        resetInputs();      
+    }
+    
 })
 
 // ~~~~ Delete hero ~~~~
