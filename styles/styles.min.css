@@ -399,11 +399,8 @@ footer .gameplay .your-ennemy__critical {
 }
 footer .gameplay .dialog {
   width: 30%;
-  padding: 5rem;
   font-size: 1.6rem;
   color: #f2e7bf;
-  background-color: rgba(0, 0, 0, 0.6);
-  border: 2px solid #1c1c1c;
   border-radius: 50%;
   text-align: center;
   display: flex;
@@ -413,6 +410,13 @@ footer .gameplay .dialog {
   position: absolute;
   top: 50%;
   z-index: 1;
+}
+footer .gameplay .dialog > div {
+  width: 100%;
+  padding: 5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #1c1c1c;
+  border-radius: 50%;
 }
 footer .gameplay .your-player__dialog {
   left: 2rem;

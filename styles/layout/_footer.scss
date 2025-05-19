@@ -179,11 +179,8 @@ footer {
         }
         .dialog {
             width: 30%;
-            padding: 5rem;
             font-size: 1.6rem;
             color: $white-dark;
-            background-color: rgba(0,0,0,0.6);
-            border: 2px solid $main-darker;
             border-radius: 50%;
             text-align: center;
             display: flex;
@@ -193,6 +190,14 @@ footer {
             position: absolute;
             top: 50%;
             z-index: 1;
+
+            & > div {
+                width: 100%;
+                padding: 5rem;
+                background-color: rgba(0,0,0,0.6);
+                border: 2px solid $main-darker;
+                border-radius: 50%;
+            }
         }
         .your-player__dialog {
             left: 2rem;

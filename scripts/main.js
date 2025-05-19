@@ -15,10 +15,11 @@ const attackBtn         = document.querySelector(".attack-btn");
 const potionBtn         = document.querySelector(".potion-btn");
 // ~~~~ Arena ~~~~
 const yourPlayerCard    = document.querySelector(".your-player__card-status");
-const yourPlayerDialog  = document.querySelector(".your-player__dialog");
 const yourEnnemyCard    = document.querySelector(".your-ennemy__card-status");
-const yourEnnemyDialog  = document.querySelector(".your-ennemy__dialog");
 const arena             = document.querySelector(".arena");
+const yourPlayerDialog  = document.querySelector(".your-player__dialog");
+const yourEnnemyDialog  = document.querySelector(".your-ennemy__dialog");
+
 
 // ==== Variables ====
 const knights = [];
@@ -38,9 +39,9 @@ class Knight {
     }
     shout(isAttacker) {
         if (isAttacker) {
-            yourPlayerDialog.innerHTML = `Je m'appelle &nbsp;<span class="highlight-blue">${this.name}</span>.`;
+            yourPlayerDialog.innerHTML = `<div>Je m'appelle &nbsp;<span class="highlight-blue">${this.name}</span>.</div>`;
         } else {
-            yourEnnemyDialog.innerHTML = `Retiens &nbsp;<span class="highlight">${this.name}</span>,<wbr> c'est mon nom... et le jour de ta défaite !`;
+            yourEnnemyDialog.innerHTML = `<div>Retiens &nbsp;<span class="highlight">${this.name}</span>,<wbr> c'est mon nom... et le jour de ta défaite !</div>`;
         }
     }
     attack(attacker, defender) {
@@ -62,11 +63,11 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         // Mettra à jour les dialogues
-        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts. `
+        yourPlayerDialog.innerHTML = `<div><span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts.</div> `
         if (isCritical && totalDamage > 0) {
             const divYourPlayerCritical = document.createElement("div");
             divYourPlayerCritical.className = "your-player__critical critical"
-            divYourPlayerCritical.innerHTML = "Coup critique X2 !!!"
+            divYourPlayerCritical.innerHTML = `Coup critique X2 !!!`
             arena.append(divYourPlayerCritical);
             setTimeout(() => {
                 arena.prepend(divYourPlayerCritical);
@@ -99,7 +100,7 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         // Mettra à jour les dialogues
-        yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. `;
+        yourEnnemyDialog.innerHTML = `<div><span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. </div>`;
         if (isCritical && totalDamage > 0) {
             const divYourEnnemyCritical = document.createElement("div");
             divYourEnnemyCritical.className = "your-ennemy__critical critical"
@@ -118,7 +119,7 @@ class Knight {
     }
     magicAttack(attacker, defender) {
         if (attacker.mana < 20) {
-            yourPlayerDialog.innerHTML = `Je suis à cours de mana...mais il me reste la force physique !`;
+            yourPlayerDialog.innerHTML = `J<div>e suis à cours de mana...mais il me reste la force physique !</div>`;
             return
         }
 
@@ -141,7 +142,7 @@ class Knight {
         yourPlayerCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${attacker.mana}</div>`;
 
         // Mettra à jour les dialogues
-        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts. `
+        yourPlayerDialog.innerHTML = `<div><span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts.</div> `
         if (isCritical && totalDamage > 0) {
             const divYourPlayerCritical = document.createElement("div");
             divYourPlayerCritical.className = "your-player__critical critical"
@@ -164,7 +165,7 @@ class Knight {
     }
     counterMagicAttack(attacker, defender) {
         if (defender.mana < 20) {
-            yourEnnemyDialog.innerHTML = `Oh non ! Mes pouvoirs m'abandonnent !`;
+            yourEnnemyDialog.innerHTML = `<div>Oh non ! Mes pouvoirs m'abandonnent !</div>`;
             return
         }
 
@@ -187,7 +188,7 @@ class Knight {
         yourEnnemyCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${defender.mana}</div>`;
 
         // Mettra à jour les dialogues
-        yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. `;
+        yourEnnemyDialog.innerHTML = `<div><span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts.</div> `;
         if (isCritical && totalDamage > 0) {
             const divYourEnnemyCritical = document.createElement("div");
             divYourEnnemyCritical.className = "your-ennemy__critical critical"
@@ -236,7 +237,6 @@ function addKnight(name, strength, magic, mana, potions, hp) {
         alert("Veuillez remplir les champs");
         return;
     }
-    console.log("HP initial:", hp);
 
     // Vérifier si un Knight avec le même nom existe déjà
     const knightExists = knights.some(knight => knight.name === name);
@@ -398,6 +398,7 @@ function displayClass() {
         tagListClass.append(divClassScoreIntelligence);
         tagListClass.append(divClassInfoConstitution);
         tagListClass.append(divClassScoreConstitution);
+        
     } else if (selectClass.value === "battlemage") {
         // Créer mes éléments
         const divClassInfoStrength          = document.createElement("p");
@@ -600,28 +601,28 @@ function chooseTypeOfAttack(attacker, defender) {
 
                 // Dialogue fin de partie
                 setTimeout(()=>{
-                   yourEnnemyDialog.innerHTML = "NOOOooon ! La victoire était à moi !";
+                   yourEnnemyDialog.innerHTML = `<div>NOOOooon ! La victoire était à moi !</div>`;
                 }, 1000)
                 setTimeout(()=>{
-                    yourPlayerDialog.innerHTML = "La jour de ma défaite, as-tu dit? Tu t'es trompé lourdement.";
-                }, 1500)
+                    yourPlayerDialog.innerHTML = `<div>Le jour de ma défaite, as-tu dit? Tu t'es trompé lourdement.</div>`;
+                }, 3000)
                 setTimeout(() => {
-                    yourEnnemyDialog.innerHTML += "&nbsp; Ah, je meurs...";
-                }, 2000)
+                    yourEnnemyDialog.innerHTML += `<div>&nbsp; Ah, je meurs...</div>`;
+                }, 5000)
 
             } else if (attacker.hp < 1) {
                 confirm("GAME OVER")
 
                 // Dialogue fin de partie
                 setTimeout(()=>{
-                    yourEnnemyDialog.innerHTML = "Tu n'as rien pu faire face à ma toute puissance !";
+                    yourEnnemyDialog.innerHTML = `<div>Tu n'as rien pu faire face à ma toute puissance !</div>`;
                 }, 1000)
                 setTimeout(()=>{
-                    yourPlayerDialog.innerHTML = "Espèce de gredin !"
-                }, 1500)
+                    yourPlayerDialog.innerHTML = `<div>Espèce de gredin !</div>`
+                }, 3000)
                 setTimeout(() => {
-                    yourEnnemyDialog.innerHTML += "&nbsp; Meurs, mécréant !";
-                }, 2000)
+                    yourEnnemyDialog.innerHTML += `<div>&nbsp; Meurs, mécréant !</div>`;
+                }, 5000)
 
             } else {
                 // Timer avant la contreattaque
@@ -642,28 +643,28 @@ function chooseTypeOfAttack(attacker, defender) {
 
                 // Dialogue fin de partie
                 setTimeout(()=>{
-                   yourEnnemyDialog.innerHTML = "NOOOooon ! La victoire était à moi !";
+                   yourEnnemyDialog.innerHTML = `<div>NOOOooon ! La victoire était à moi !</div>`;
                 }, 1000)
                 setTimeout(()=>{
-                    yourPlayerDialog.innerHTML = "La jour de ma défaite, as-tu dit? Tu t'es trompé lourdement.";
-                }, 1500)
+                    yourPlayerDialog.innerHTML = `<div>Le jour de ma défaite, as-tu dit? Tu t'es trompé lourdement.</div>`;
+                }, 3000)
                 setTimeout(() => {
-                    yourEnnemyDialog.innerHTML += "&nbsp; Ah, je meurs...";
-                }, 2000)
+                    yourEnnemyDialog.innerHTML += `<div>&nbsp; Ah, je meurs...</div>`;
+                }, 5000)
 
             } else if (attacker.hp < 1) {
                 confirm("GAME OVER")
 
                 // Dialogue fin de partie
                 setTimeout(()=>{
-                    yourEnnemyDialog.innerHTML = "Tu n'as rien pu faire face à ma toute puissance !";
+                    yourEnnemyDialog.innerHTML = `<div>Tu n'as rien pu faire face à ma toute puissance !</div>`;
                 }, 1000)
                 setTimeout(()=>{
-                    yourPlayerDialog.innerHTML = "Espèce de gredin !"
-                }, 1500)
+                    yourPlayerDialog.innerHTML = `<div>Espèce de gredin !</div>`
+                }, 3000)
                 setTimeout(() => {
-                    yourEnnemyDialog.innerHTML += "&nbsp; Meurs, mécréant !";
-                }, 2000)
+                    yourEnnemyDialog.innerHTML += `<div>&nbsp; Meurs, mécréant !</div>`;
+                }, 5000)
 
             } else {
                 // Timer avant la contreattaque
