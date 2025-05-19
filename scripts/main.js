@@ -64,6 +64,10 @@ class Knight {
             yourPlayerDialogMessage += "Coup critique !"
         }
         yourPlayerDialog.innerHTML = yourPlayerDialogMessage;
+        // Faire disparaitre le message
+        setTimeout(()=> {
+            yourPlayerDialog.innerHTML = "";
+        }, 2000);
 
         // Vérifier si le défenseur a besoin de prendre une potion
         if (defender.hp < 50 && defender.potions > 0) {
@@ -92,6 +96,10 @@ class Knight {
             yourEnnemyDialogMessage += "Coup critique !"
         }
         yourEnnemyDialog.innerHTML = yourEnnemyDialogMessage;
+        // Faire disparaitre le message
+        setTimeout(()=> {
+            yourEnnemyDialog.innerHTML = "";
+        }, 2000);
     }
     magicAttack(attacker, defender) {
         if (attacker.mana < 20) {
@@ -112,7 +120,11 @@ class Knight {
 
         yourPlayerCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${attacker.mana}</div>`;
         yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${damage} points de dégâts !`;  
-        
+        // Faire disparaitre le message
+        setTimeout(()=> {
+            yourPlayerDialog.innerHTML = "";
+        }, 2000);
+
         // Vérifier si le défenseur a besoin de prendre une potion
         if (defender.hp < 50 && defender.potions > 0) {
             defender.takeAPotion(false);
@@ -137,6 +149,10 @@ class Knight {
 
         yourEnnemyCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${defender.mana}</div>`;
         yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> attaque <span class="highlight-blue">${attacker.name}</span> et inflige ${damage} points de dégâts !`;
+        // Faire disparaitre le message
+        setTimeout(()=> {
+            yourEnnemyDialog.innerHTML = "";
+        }, 2000);
     }
     takeAPotion(isAttacker) {
 
@@ -459,7 +475,11 @@ function chooseTypeOfAttack(attacker, defender) {
             } else if (attacker.hp < 1) {
                 confirm("GAME OVER")
             } else {
-                attacker.counterAttack(attacker, defender);
+                // Timer avant la contreattaque
+                setTimeout(()=> {
+                    attacker.counterAttack(attacker, defender);
+                }, 1000);
+                
             }
         }
 
@@ -473,7 +493,10 @@ function chooseTypeOfAttack(attacker, defender) {
             } else if (attacker.hp < 1) {
                 confirm("GAME OVER")
             } else {
-                attacker.counterMagicAttack(attacker, defender);
+                // Timer avant la contreattaque
+                setTimeout(()=> {
+                    attacker.counterMagicAttack(attacker, defender);
+                }, 1000);
             }
         }
 
