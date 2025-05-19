@@ -23,6 +23,8 @@ const yourEnnemyDialog  = document.querySelector(".your-ennemy__dialog");
 
 // ==== Variables ====
 const knights = [];
+const tabMissMessagesYourPlayer = ["Oh non, encore raté !", "Il va falloir que je me concentre...", "J'y étais presque", "Tiens bon, on y est presque", "Je t'aurai la prochaine fois !"];
+const tabMissMessagesYourEnnemy = ["Maudit sois-tu !", "Arrête de bouger moustique !", "Mmmm ça m'énerve !", "Tu vas courir encore longtemps comme ça?!", "Evidemment, je n'ai jamais de chance..."]
 
 // ==== Fonctions ====
 // ~~~~ Build your Hero ~~~~
@@ -34,8 +36,6 @@ class Knight {
         this.mana       = mana;
         this.potions    = potions;
         this.hp         = hp;
-
-        console.log("HP in constructor:", this.hp);
     }
     shout(isAttacker) {
         if (isAttacker) {
@@ -46,7 +46,7 @@ class Knight {
     }
     attack(attacker, defender) {
         // Calculer dégat
-        let damage          = parseFloat((attacker.strength * Math.random()).toFixed())
+        let damage          = parseFloat((attacker.strength * Math.random()).toFixed());
         let isCritical      = Math.random() < 0.1;
         let criticalIndex   = isCritical ? 2 : 1;
         let totalDamage     = damage * criticalIndex;
@@ -60,18 +60,24 @@ class Knight {
 
         const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (defender.hp / 100) * 100;
-        hpBar.style.width = `${hpPercentage}%`;
+        hpBar.style.width = `${hpPercentage*2}px`;
 
-        // Mettra à jour les dialogues
-        yourPlayerDialog.innerHTML = `<div><span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts.</div> `
-        if (isCritical && totalDamage > 0) {
-            const divYourPlayerCritical = document.createElement("div");
-            divYourPlayerCritical.className = "your-player__critical critical"
-            divYourPlayerCritical.innerHTML = `Coup critique X2 !!!`
-            arena.append(divYourPlayerCritical);
-            setTimeout(() => {
-                arena.prepend(divYourPlayerCritical);
-            }, 2000)
+        // Mettre à jour les dialogues
+        if (totalDamage === 0) {
+            const randomTxtMsg = tabMissMessagesYourPlayer[Math.floor(Math.random()*tabMissMessagesYourPlayer.length)];
+            yourPlayerDialog.innerHTML = `<div>${randomTxtMsg}</div>`;
+
+        } else {
+            yourPlayerDialog.innerHTML = `<div><span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts.</div> `
+            if (isCritical && totalDamage > 0) {
+                const divYourPlayerCritical = document.createElement("div");
+                divYourPlayerCritical.className = "your-player__critical critical"
+                divYourPlayerCritical.innerHTML = `Coup critique X2 !!!`
+                arena.append(divYourPlayerCritical);
+                setTimeout(() => {
+                    arena.prepend(divYourPlayerCritical);
+                }, 2000)
+            }
         }
         // Faire disparaitre le message
         setTimeout(()=> {
@@ -97,19 +103,25 @@ class Knight {
 
         const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (attacker.hp/100) * 100;
-        hpBar.style.width = `${hpPercentage}%`;
+        hpBar.style.width = `${hpPercentage*2}px`;
 
-        // Mettra à jour les dialogues
-        yourEnnemyDialog.innerHTML = `<div><span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. </div>`;
-        if (isCritical && totalDamage > 0) {
-            const divYourEnnemyCritical = document.createElement("div");
-            divYourEnnemyCritical.className = "your-ennemy__critical critical"
-            divYourEnnemyCritical.innerHTML = "Coup critique X2 !!!"
-            arena.append(divYourEnnemyCritical);
+        // Mettre à jour les dialogues
+        if (totalDamage === 0) {
+            const randomTxtMsg = tabMissMessagesYourEnnemy[Math.floor(Math.random()*tabMissMessagesYourEnnemy.length)];
+            yourEnnemyDialog.innerHTML = `<div>${randomTxtMsg}</div>`;
 
-            setTimeout(() => {
-                arena.prepend(divYourEnnemyCritical);
-            }, 2000)
+        } else {
+            yourEnnemyDialog.innerHTML = `<div><span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. </div>`;
+            if (isCritical && totalDamage > 0) {
+                const divYourEnnemyCritical = document.createElement("div");
+                divYourEnnemyCritical.className = "your-ennemy__critical critical"
+                divYourEnnemyCritical.innerHTML = "Coup critique X2 !!!"
+                arena.append(divYourEnnemyCritical);
+
+                setTimeout(() => {
+                    arena.prepend(divYourEnnemyCritical);
+                }, 2000)
+            }
         }
 
         // Faire disparaitre le message
@@ -137,22 +149,28 @@ class Knight {
 
         const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (defender.hp / 100) * 100;
-        hpBar.style.width = `${hpPercentage}%`;
+        hpBar.style.width = `${hpPercentage*2}px`;
 
         yourPlayerCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${attacker.mana}</div>`;
 
-        // Mettra à jour les dialogues
-        yourPlayerDialog.innerHTML = `<div><span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts.</div> `
-        if (isCritical && totalDamage > 0) {
-            const divYourPlayerCritical = document.createElement("div");
-            divYourPlayerCritical.className = "your-player__critical critical"
-            divYourPlayerCritical.innerHTML = "Coup critique X2 !!!"
-            arena.append(divYourPlayerCritical);
-            setTimeout(() => {
-                arena.prepend(divYourPlayerCritical);
-            }, 2000)
-        }
+        // Mettre à jour les dialogues
+        if (totalDamage === 0) {
+            const randomTxtMsg = tabMissMessagesYourPlayer[Math.floor(Math.random()*tabMissMessagesYourPlayer.length)];
+            yourPlayerDialog.innerHTML = `<div>${randomTxtMsg}</div>`;
 
+        } else {
+            yourPlayerDialog.innerHTML = `<div><span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts.</div> `
+            if (isCritical && totalDamage > 0) {
+                const divYourPlayerCritical = document.createElement("div");
+                divYourPlayerCritical.className = "your-player__critical critical"
+                divYourPlayerCritical.innerHTML = "Coup critique X2 !!!"
+                arena.append(divYourPlayerCritical);
+                setTimeout(() => {
+                    arena.prepend(divYourPlayerCritical);
+                }, 2000)
+            }
+        }
+        
         // Faire disparaitre le message
         setTimeout(()=> {
             yourPlayerDialog.innerHTML = "";
@@ -183,22 +201,29 @@ class Knight {
 
         const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (attacker.hp/100)*100;
-        hpBar.style.width = `${hpPercentage}%`;
+        hpBar.style.width = `${hpPercentage*2}px`;
 
         yourEnnemyCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${defender.mana}</div>`;
 
-        // Mettra à jour les dialogues
-        yourEnnemyDialog.innerHTML = `<div><span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts.</div> `;
-        if (isCritical && totalDamage > 0) {
-            const divYourEnnemyCritical = document.createElement("div");
-            divYourEnnemyCritical.className = "your-ennemy__critical critical"
-            divYourEnnemyCritical.innerHTML = "Coup critique X2 !!!"
-            arena.append(divYourEnnemyCritical);
+        // Mettre à jour les dialogues
+        if (totalDamage === 0) {
+            const randomTxtMsg = tabMissMessagesYourEnnemy[Math.floor(Math.random()*tabMissMessagesYourEnnemy.length)];
+            yourEnnemyDialog.innerHTML = `<div>${randomTxtMsg}</div>`;
 
-            setTimeout(() => {
-                arena.prepend(divYourEnnemyCritical);
-            }, 2000)
+        } else {
+            yourEnnemyDialog.innerHTML = `<div><span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts.</div> `;
+            if (isCritical && totalDamage > 0) {
+                const divYourEnnemyCritical = document.createElement("div");
+                divYourEnnemyCritical.className = "your-ennemy__critical critical"
+                divYourEnnemyCritical.innerHTML = "Coup critique X2 !!!"
+                arena.append(divYourEnnemyCritical);
+
+                setTimeout(() => {
+                    arena.prepend(divYourEnnemyCritical);
+                }, 2000)
+            }
         }
+        
 
         // Faire disparaitre le message
         setTimeout(()=> {
@@ -216,7 +241,7 @@ class Knight {
             yourPlayerCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> ${this.hp}`;
             const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
             const hpPercentage = (this.hp/100)*100;
-            hpBar.style.width = `${hpPercentage}%`;
+            hpBar.style.width = `${hpPercentage*2}px`;
 
         } else if (!isAttacker && this.potions > 0) {
             this.potions -= 1;
@@ -227,7 +252,7 @@ class Knight {
             yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> ${this.hp}`;
             const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
             const hpPercentage = (this.hp / 100) * 100;
-            hpBar.style.width = `${hpPercentage}%`;
+            hpBar.style.width = `${hpPercentage*2}px`;
         }
     }
 }
@@ -573,7 +598,7 @@ function displayOptionKnight(knight, element) {
     const hpBar = divCardHpBarGreen;
     const hpPercentage = Math.min((knight.hp / 100) * 100, 100);
     
-    hpBar.style.width = `${hpPercentage}%`;
+    hpBar.style.width = `${hpPercentage*2}px`;
 
     // Ajouter les div à l'élément (ordre affichage)
     divCardHpBar.append(divCardHpBarGreen);

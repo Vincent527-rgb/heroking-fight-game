@@ -33,13 +33,13 @@ h2 {
     }
     &__hp-bar {
         height: 1.5rem;
-        width: 70%;
+        width: fit-content;
         margin-top: 1rem;
         border-radius: 3rem;
         border: 1px solid $main-dark;
 
         &-bg-green {
-            width: 100%;
+            width: 200px;
             height: 1.5rem;
             border-radius: 3rem;
             background: linear-gradient(to right, $main-dark, #0f9b0f);

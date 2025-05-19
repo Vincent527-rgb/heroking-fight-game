@@ -106,13 +106,13 @@ h2 {
 }
 .character-card__hp-bar {
   height: 1.5rem;
-  width: 70%;
+  width: fit-content;
   margin-top: 1rem;
   border-radius: 3rem;
   border: 1px solid #333;
 }
 .character-card__hp-bar-bg-green {
-  width: 100%;
+  width: 200px;
   height: 1.5rem;
   border-radius: 3rem;
   background: linear-gradient(to right, #333, #0f9b0f);
