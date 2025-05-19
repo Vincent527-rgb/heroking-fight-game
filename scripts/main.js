@@ -45,7 +45,7 @@ class Knight {
     }
     attack(attacker, defender) {
         // Calculer dégat
-        let damage          = attacker.strength * Math.random().toFixed(0);
+        let damage          = parseFloat((attacker.strength * Math.random()).toFixed())
         let isCritical      = Math.random() < 0.1;
         let criticalIndex   = isCritical ? 2 : 1;
         let totalDamage     = damage * criticalIndex;
@@ -53,7 +53,6 @@ class Knight {
 
         // Appliquer dégats
         defender.hp = Math.max(defender.hp-totalDamage, 0);
-        console.log("HP after attack:", defender.hp);
 
         // Mettre à jour les cartes
         yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> <div>${defender.hp}</div>`;
@@ -67,7 +66,7 @@ class Knight {
         if (isCritical && totalDamage > 0) {
             const divYourPlayerCritical = document.createElement("div");
             divYourPlayerCritical.className = "your-player__critical critical"
-            divYourPlayerCritical.innerHTML = "Coup critique !!!"
+            divYourPlayerCritical.innerHTML = "Coup critique X2 !!!"
             arena.append(divYourPlayerCritical);
             setTimeout(() => {
                 arena.prepend(divYourPlayerCritical);
@@ -85,7 +84,7 @@ class Knight {
     }
     counterAttack(attacker, defender) {
         // Calculer dégat
-        let damage          = defender.strength * Math.random().toFixed(0);
+        let damage          = parseFloat((defender.strength * Math.random()).toFixed());
         let isCritical      = Math.random() < 0.1;
         let criticalIndex   = isCritical ? 2 : 1;
         let totalDamage     = damage * criticalIndex;
@@ -104,7 +103,7 @@ class Knight {
         if (isCritical && totalDamage > 0) {
             const divYourEnnemyCritical = document.createElement("div");
             divYourEnnemyCritical.className = "your-ennemy__critical critical"
-            divYourEnnemyCritical.innerHTML = "Coup critique !!!"
+            divYourEnnemyCritical.innerHTML = "Coup critique X2 !!!"
             arena.append(divYourEnnemyCritical);
 
             setTimeout(() => {
@@ -124,7 +123,7 @@ class Knight {
         }
 
         // Calculer dégat
-        let damage = attacker.magic * Math.random().toFixed(0);
+        let damage = parseFloat((attacker.strength * Math.random()).toFixed());
         let isCritical = Math.random() < 0.2;
         let criticalIndex = isCritical ? 2 : 1;
         let totalDamage = damage * criticalIndex;
@@ -146,7 +145,7 @@ class Knight {
         if (isCritical && totalDamage > 0) {
             const divYourPlayerCritical = document.createElement("div");
             divYourPlayerCritical.className = "your-player__critical critical"
-            divYourPlayerCritical.innerHTML = "Coup critique !!!"
+            divYourPlayerCritical.innerHTML = "Coup critique X2 !!!"
             arena.append(divYourPlayerCritical);
             setTimeout(() => {
                 arena.prepend(divYourPlayerCritical);
@@ -170,7 +169,7 @@ class Knight {
         }
 
         // Calculer dégat
-        let damage = defender.magic * Math.random().toFixed(0);
+        let damage = parseFloat((defender.strength * Math.random()).toFixed());
         let isCritical = Math.random() < 0.2;
         let criticalIndex = isCritical ? 2 : 1;
         let totalDamage = damage * criticalIndex;
@@ -192,7 +191,7 @@ class Knight {
         if (isCritical && totalDamage > 0) {
             const divYourEnnemyCritical = document.createElement("div");
             divYourEnnemyCritical.className = "your-ennemy__critical critical"
-            divYourEnnemyCritical.innerHTML = "Coup critique !!!"
+            divYourEnnemyCritical.innerHTML = "Coup critique X2 !!!"
             arena.append(divYourEnnemyCritical);
 
             setTimeout(() => {
