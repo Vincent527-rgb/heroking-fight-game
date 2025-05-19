@@ -113,16 +113,8 @@ footer {
                     margin-left: 2rem;
                 }
             }
-            &__dialog {
-                width: 100%;
-                height: 10rem;
-                padding: .5rem;
-                font-size: 1.6rem;
-                border: 3px solid $main-darker;
-            }
         }
         .arena {
-            padding: 2rem;
             margin: 5rem auto;
             max-width: 90%;
             width: 100%;
@@ -162,6 +154,29 @@ footer {
                 border-radius: 1rem;
             }
         }
+        .dialog {
+            width: 30%;
+            padding: 5rem;
+            font-size: 1.6rem;
+            color: $white-dark;
+            background-color: rgba(0,0,0,0.6);
+            border: 2px solid $main-darker;
+            border-radius: 50%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            position: absolute;
+            top: 50%;
+            z-index: 1;
+        }
+        .your-player__dialog {
+            left: 2rem;
+        }
+        .your-ennemy__dialog {
+            right: 2rem;
+        }
         .your-ennemy {
             width: 90%;
             padding: 2rem;
@@ -188,13 +203,6 @@ footer {
             &__card-status {
                 width: 100%;
                 flex-grow: 5;
-            }
-            &__dialog {
-                width: 100%;
-                height: 10rem;
-                padding: .5rem;
-                font-size: 1.6rem;
-                border: 3px solid $main-darker;
             }
         }
     }

@@ -35,9 +35,9 @@ class Knight {
     }
     shout(isAttacker) {
         if (isAttacker) {
-            yourPlayerDialog.innerHTML = `Je m'appelle <span class="highlight-blue">${this.name}</span>.`;
+            yourPlayerDialog.innerHTML = `Je m'appelle &nbsp;<span class="highlight-blue">${this.name}</span>.`;
         } else {
-            yourEnnemyDialog.innerHTML = `Retiens <span class="highlight">${this.name}</span>, c'est mon nom... et le jour de ta défaite !`;
+            yourEnnemyDialog.innerHTML = `Retiens &nbsp;<span class="highlight">${this.name}</span>,<wbr> c'est mon nom... et le jour de ta défaite !`;
         }
     }
     attack(attacker, defender) {
@@ -59,7 +59,7 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         // Mettra à jour les dialogues
-        let yourPlayerDialogMessage = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${totalDamage} points de dégâts. `
+        let yourPlayerDialogMessage = `<span class="highlight-blue">${attacker.name}</span>&nbsp; attaque &nbsp; <span class="highlight">${defender.name}</span>&nbsp; et inflige ${totalDamage} points de dégâts. `
         if (isCritical && totalDamage > 0) {
             yourPlayerDialogMessage += "Coup critique !"
         }
@@ -91,7 +91,7 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         // Mettra à jour les dialogues
-        let yourEnnemyDialogMessage = `<span class="highlight">${defender.name}</span> attaque <span class="highlight-blue">${attacker.name}</span> et inflige ${totalDamage} points de dégâts. `;
+        let yourEnnemyDialogMessage = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${totalDamage} points de dégâts. `;
         if (isCritical && totalDamage > 0) {
             yourEnnemyDialogMessage += "Coup critique !"
         }
@@ -119,7 +119,7 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         yourPlayerCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${attacker.mana}</div>`;
-        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${damage} points de dégâts !`;  
+        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span> &nbsp; attaque <span class="highlight">${defender.name}</span> &nbsp; et inflige ${damage} points de dégâts !`;  
         // Faire disparaitre le message
         setTimeout(()=> {
             yourPlayerDialog.innerHTML = "";
@@ -148,7 +148,7 @@ class Knight {
         hpBar.style.width = `${hpPercentage}%`;
 
         yourEnnemyCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${defender.mana}</div>`;
-        yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> attaque <span class="highlight-blue">${attacker.name}</span> et inflige ${damage} points de dégâts !`;
+        yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> &nbsp; attaque <span class="highlight-blue">${attacker.name}</span> &nbsp; et inflige ${damage} points de dégâts !`;
         // Faire disparaitre le message
         setTimeout(()=> {
             yourEnnemyDialog.innerHTML = "";
@@ -472,8 +472,32 @@ function chooseTypeOfAttack(attacker, defender) {
 
             if (defender.hp < 1) {
                 confirm("VICTORY")
+
+                // Dialogue fin de partie
+                setTimeout(()=>{
+                   yourEnnemyDialog.innerHTML = "NOOOooon ! La victoire était à moi !";
+                }, 1000)
+                setTimeout(()=>{
+                    yourPlayerDialog.innerHTML = "La jour de ma défaite, as-tu dit? Tu t'es trompé lourdement.";
+                }, 1500)
+                setTimeout(() => {
+                    yourEnnemyDialog.innerHTML += "&nbsp; Ah, je meurs...";
+                }, 2000)
+
             } else if (attacker.hp < 1) {
                 confirm("GAME OVER")
+
+                // Dialogue fin de partie
+                setTimeout(()=>{
+                    yourEnnemyDialog.innerHTML = "Tu n'as rien pu faire face à ma toute puissance !";
+                }, 1000)
+                setTimeout(()=>{
+                    yourPlayerDialog.innerHTML = "Espèce de gredin !"
+                }, 1500)
+                setTimeout(() => {
+                    yourEnnemyDialog.innerHTML += "&nbsp; Meurs, mécréant !";
+                }, 2000)
+
             } else {
                 // Timer avant la contreattaque
                 setTimeout(()=> {
@@ -490,8 +514,32 @@ function chooseTypeOfAttack(attacker, defender) {
 
             if (defender.hp < 1) {
                 confirm("VICTORY")
+
+                // Dialogue fin de partie
+                setTimeout(()=>{
+                   yourEnnemyDialog.innerHTML = "NOOOooon ! La victoire était à moi !";
+                }, 1000)
+                setTimeout(()=>{
+                    yourPlayerDialog.innerHTML = "La jour de ma défaite, as-tu dit? Tu t'es trompé lourdement.";
+                }, 1500)
+                setTimeout(() => {
+                    yourEnnemyDialog.innerHTML += "&nbsp; Ah, je meurs...";
+                }, 2000)
+
             } else if (attacker.hp < 1) {
                 confirm("GAME OVER")
+
+                // Dialogue fin de partie
+                setTimeout(()=>{
+                    yourEnnemyDialog.innerHTML = "Tu n'as rien pu faire face à ma toute puissance !";
+                }, 1000)
+                setTimeout(()=>{
+                    yourPlayerDialog.innerHTML = "Espèce de gredin !"
+                }, 1500)
+                setTimeout(() => {
+                    yourEnnemyDialog.innerHTML += "&nbsp; Meurs, mécréant !";
+                }, 2000)
+
             } else {
                 // Timer avant la contreattaque
                 setTimeout(()=> {

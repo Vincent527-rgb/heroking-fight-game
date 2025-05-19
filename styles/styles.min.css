@@ -80,10 +80,6 @@ h2 {
   color: #e5b64a;
 }
 
-h3 {
-  font-size: 1.6rem;
-}
-
 .character-card {
   padding: 2rem;
   color: #333;
@@ -335,15 +331,7 @@ footer .gameplay .your-player__fight-controls button {
   margin-bottom: 2rem;
   margin-left: 2rem;
 }
-footer .gameplay .your-player__dialog {
-  width: 100%;
-  height: 10rem;
-  padding: 0.5rem;
-  font-size: 1.6rem;
-  border: 3px solid #1c1c1c;
-}
 footer .gameplay .arena {
-  padding: 2rem;
   margin: 5rem auto;
   max-width: 90%;
   width: 100%;
@@ -384,6 +372,29 @@ footer .gameplay .arena video {
   object-fit: cover;
   border-radius: 1rem;
 }
+footer .gameplay .dialog {
+  width: 30%;
+  padding: 5rem;
+  font-size: 1.6rem;
+  color: #f2e7bf;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #1c1c1c;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+}
+footer .gameplay .your-player__dialog {
+  left: 2rem;
+}
+footer .gameplay .your-ennemy__dialog {
+  right: 2rem;
+}
 footer .gameplay .your-ennemy {
   width: 90%;
   padding: 2rem;
@@ -415,13 +426,6 @@ footer .gameplay .your-ennemy {
 footer .gameplay .your-ennemy__card-status {
   width: 100%;
   flex-grow: 5;
-}
-footer .gameplay .your-ennemy__dialog {
-  width: 100%;
-  height: 10rem;
-  padding: 0.5rem;
-  font-size: 1.6rem;
-  border: 3px solid #1c1c1c;
 }
 
 body {
