@@ -60,7 +60,7 @@ class Knight {
 
         // Mettra à jour les dialogues
         let yourPlayerDialogMessage = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${totalDamage} points de dégâts. `
-        if (isCritical) {
+        if (isCritical && totalDamage > 0) {
             yourPlayerDialogMessage += "Coup critique !"
         }
         yourPlayerDialog.innerHTML = yourPlayerDialogMessage;
@@ -88,7 +88,7 @@ class Knight {
 
         // Mettra à jour les dialogues
         let yourEnnemyDialogMessage = `<span class="highlight">${defender.name}</span> attaque <span class="highlight-blue">${attacker.name}</span> et inflige ${totalDamage} points de dégâts. `;
-        if (isCritical) {
+        if (isCritical && totalDamage > 0) {
             yourEnnemyDialogMessage += "Coup critique !"
         }
         yourEnnemyDialog.innerHTML = yourEnnemyDialogMessage;
@@ -145,7 +145,7 @@ class Knight {
             this.hp = Math.min(this.hp + 30, 100);
             
             // Mettre à jour les cartes l'attacker
-            yourPlayerCard.querySelector(".character-card__potions").innerHTML = `<div>🍹 Potions :</div> ${this.potions}`;
+            yourPlayerCard.querySelector(".character-card__potions").innerHTML = `<div>🧉 Potions :</div> ${this.potions}`;
             yourPlayerCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> ${this.hp}`;
             const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
             const hpPercentage = (this.hp/100)*100;
@@ -156,7 +156,7 @@ class Knight {
             this.hp = Math.min(this.hp + 30, 100);
 
             // Mettre à jour les cartes pour le defender
-            yourEnnemyCard.querySelector(".character-card__potions").innerHTML = `<div>🍹 Potions :</div> ${this.potions}`;
+            yourEnnemyCard.querySelector(".character-card__potions").innerHTML = `<div>🧉 Potions :</div> ${this.potions}`;
             yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> ${this.hp}`;
             const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
             const hpPercentage = (this.hp / 100) * 100;
