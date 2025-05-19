@@ -12,6 +12,7 @@ const selectDefender    = document.querySelector("#defender");
 // ~~~~ Fight controls ~~~~
 const selectAttackType  = document.querySelector("#attack-type");
 const attackBtn         = document.querySelector(".attack-btn");
+const potionBtn         = document.querySelector(".potion-btn");
 // ~~~~ Arena ~~~~
 const yourPlayerCard    = document.querySelector(".your-player__card-status");
 const yourPlayerDialog  = document.querySelector(".your-player__dialog");
@@ -42,58 +43,103 @@ class Knight {
     attack(attacker, defender) {
         const damage = attacker.strength * Math.random().toFixed(0);
         defender.hp = Math.max(defender.hp-damage, 0);
-        yourEnnemyCard.querySelector(".character-card__hp").textContent = `❤️ Vitality : ${defender.hp}`;
-        console.log(damage);
+
+        // Mettre à jour les cartes
+        yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> <div>${defender.hp}</div>`;
 
         const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (defender.hp / 100) * 100;
         hpBar.style.width = `${hpPercentage}%`;
 
         yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${damage} points de dégâts !`;
+
+        // Vérifier si le défenseur a besoin de prendre une potion
+        if (defender.hp < 50 && defender.potions > 0) {
+            defender.takeAPotion(false);
+        }
     }
     counterAttack(attacker, defender) {
         const damage = defender.strength * Math.random().toFixed(0);
-        attacker.hp = Math.max(attacker.hp-damage, 0);;
-        console.log(damage);
+        attacker.hp = Math.max(attacker.hp-damage, 0);
 
-        yourPlayerCard.querySelector(".character-card__hp").textContent = `❤️ Vitality : ${attacker.hp}`;
+        // Mettre à jour les cartes
+        yourPlayerCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> <div>${attacker.hp}</div>`;
 
         const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
-        const hpPercentage = (attacker.hp/100)*100;
+        const hpPercentage = (attacker.hp/100) * 100;
         hpBar.style.width = `${hpPercentage}%`;
 
         yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> attaque <span class="highlight-blue">${attacker.name}</span> et inflige ${damage} points de dégâts !`;
     }
     magicAttack(attacker, defender) {
+        if (attacker.mana < 20) {
+            yourPlayerDialog.innerHTML = `Je suis à cours de mana...mais il me reste la force physique !`;
+            return
+        }
+
         const damage = attacker.magic * Math.random().toFixed(0);
         defender.hp = Math.max(defender.hp-damage, 0);
         attacker.mana -= 20;
-        console.log(damage);
 
-        yourEnnemyCard.querySelector(".character-card__hp").textContent = `❤️ Vitality : ${defender.hp}`;
+        // Mettre à jour les cartes
+        yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> <div>${defender.hp}</div>`;
 
         const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (defender.hp / 100) * 100;
         hpBar.style.width = `${hpPercentage}%`;
 
-        yourPlayerCard.querySelector(".character-card__mana").textContent = `🔮 Mana : ${attacker.mana}`;
-        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${damage} points de dégâts !`;
+        yourPlayerCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${attacker.mana}</div>`;
+        yourPlayerDialog.innerHTML = `<span class="highlight-blue">${attacker.name}</span> attaque <span class="highlight">${defender.name}</span> et inflige ${damage} points de dégâts !`;  
+        
+        // Vérifier si le défenseur a besoin de prendre une potion
+        if (defender.hp < 50 && defender.potions > 0) {
+            defender.takeAPotion(false);
+        }
     }
     counterMagicAttack(attacker, defender) {
+        if (defender.mana < 20) {
+            yourEnnemyDialog.innerHTML = `Oh non ! Mes pouvoirs m'abandonnent !`;
+            return
+        }
+
         const damage = defender.magic * Math.random().toFixed(0);
         attacker.hp = Math.max(attacker.hp-damage, 0);
         defender.mana -= 20;
-        console.log(damage);
         
-
-        yourPlayerCard.querySelector(".character-card__hp").textContent = `❤️ Vitality : ${attacker.hp}`;
+        // Mettre à jour les cartes
+        yourPlayerCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> <div>${attacker.hp}</div>`;
 
         const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (attacker.hp/100)*100;
         hpBar.style.width = `${hpPercentage}%`;
 
-        yourEnnemyCard.querySelector(".character-card__mana").textContent = `🔮 Mana : ${defender.mana}`;
+        yourEnnemyCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${defender.mana}</div>`;
         yourEnnemyDialog.innerHTML = `<span class="highlight">${defender.name}</span> attaque <span class="highlight-blue">${attacker.name}</span> et inflige ${damage} points de dégâts !`;
+    }
+    takeAPotion(isAttacker) {
+
+        if (isAttacker && this.potions > 0) {
+            this.potions -= 1;
+            this.hp = Math.min(this.hp + 30, 100);
+            
+            // Mettre à jour les cartes l'attacker
+            yourPlayerCard.querySelector(".character-card__potions").innerHTML = `<div>🍹 Potions :</div> ${this.potions}`;
+            yourPlayerCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> ${this.hp}`;
+            const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
+            const hpPercentage = (this.hp/100)*100;
+            hpBar.style.width = `${hpPercentage}%`;
+
+        } else if (!isAttacker && this.potions > 0) {
+            this.potions -= 1;
+            this.hp = Math.min(this.hp + 30, 100);
+
+            // Mettre à jour les cartes pour le defender
+            yourEnnemyCard.querySelector(".character-card__potions").innerHTML = `<div>🍹 Potions :</div> ${this.potions}`;
+            yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> ${this.hp}`;
+            const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
+            const hpPercentage = (this.hp / 100) * 100;
+            hpBar.style.width = `${hpPercentage}%`;
+        }
     }
 }
 
@@ -101,6 +147,13 @@ class Knight {
 function addKnight(name, strength, magic) {
     if (name === "") {
         alert("Veuillez remplir les champs");
+        return;
+    }
+
+    // Vérifier si un Knight avec le même nom existe déjà
+    const knightExists = knights.some(knight => knight.name === name);
+    if (knightExists) {
+        alert("A hero with that name already exists!");
         return;
     }
 
@@ -354,8 +407,7 @@ function displayOptionKnight(knight, element) {
 
     // Mettre jour la barre hp de mes perso
     const hpBar = divCardHpBarGreen;
-    const hpPercentage = (knight.hp / 100) * 100;
-    console.log(hpPercentage);
+    const hpPercentage = Math.min((knight.hp / 100) * 100, 100);
     
     hpBar.style.width = `${hpPercentage}%`;
 
@@ -404,7 +456,7 @@ function chooseTypeOfAttack(attacker, defender) {
         }
 
     } else {
-        alert("Please, select an attack et win this fight...")
+        alert("Please, select an attack and win this fight...")
     }
 }
 
@@ -412,7 +464,6 @@ function chooseTypeOfAttack(attacker, defender) {
 // ~~~~ Hero creation ~~~~
 addBtn.addEventListener("click", function (e) {
     e.preventDefault();
-    console.log("Button clicked");
 
     if (selectClass.value === "warrior") {
         const name      = inputname.value;
@@ -441,7 +492,6 @@ tagListPlayer.addEventListener("click", function (event) {
         const knightName = knights[index].name;
         
         knights.splice(index, 1);
-        console.log(knights);
         
         deleteOptionKnight(knightName);
         displayKnights();
@@ -490,21 +540,23 @@ attackBtn.addEventListener("click", function (e) {
 
     chooseTypeOfAttack(attacker, defender);
 })
+potionBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    
+    // Récupérer les noms des personnages sélectionnés
+    const attackerName = selectAttacker.value;
+    const attacker = knights.find(knight => knight.name === attackerName);
+
+    attacker.takeAPotion(true);
+})
 
 
-// todo4: prendre une potion => rajouter code html button?
-// todo7: transformer l'exo en projet pro pour portfolio (factoring, design, responsive)
-// todo: problème lors de la suppression des cards (si même nom, les deux disparaissent de sélect)
-// todo: créer un bouton prendre une potion + règles pour le defender (vie<50 && potion > 0)
-// todo: limiter les attaques magiques à la mana qu'on peut utiliser
 // todo: créer un délai aux contre-attaques
 // todo: changer la dispo? faire une maquette
-    // Améliorer les boîtes de dialogue
+    // Améliorer les boîtes de dialogue ==> bulle arena? mettre petit personnage?
     // Créer des boss sélectionnables dans les defender avec des attaques spéciales
     // Générer automatiquement un nombre aléatoire pour la force et la magie => l'afficher avec ??? pour laisser le mystère
-    // Choisir son symbole à la place
-    // Faire un chiffre sur 20 pour éviter les attaques trop puissantes?
-    // Jeter un dé de précision à chaque attaque
-    // Créer des attaques spéciales limitées (exemple avec attaques magiques => feu, eau, vent, terre ou nom d'attaque pour le fun - Coup de grâce, coup virevoltant)
+    // Choisir son symbole à la place des races
+    // Créer des attaques spéciales limitées (exemple avec attaques magiques => feu, eau, vent, terre ou nom d'attaque pour le fun - Coup de grâce, coup virevoltant) liée à la race?
     // Faire des héros précongifurés (classe : warrior, magician, druid?)
-    // Créer une animation combat (strength & magic)
+    // Créer une animation combat (strength & magic)? => une autre fois peut-être

@@ -29,20 +29,17 @@ footer {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        flex-grow: 1;
 
         @media screen and (min-width:960px) and (max-width:1550px) {
-            max-width: 1000px;
+            max-width: 960px;
             width: 100%;
             margin: 5rem;
-            flex-grow: 2;
         }
         @media screen and (min-width:1550px) {
-            max-width: 1000px;
+            max-width: 960px;
             width: 100%;
             flex-direction: row;
             justify-content: space-evenly;
-            flex-grow: 2;
         }
 
         img {
@@ -106,6 +103,7 @@ footer {
                 select {
                     padding: .5rem;
                     margin-bottom: 2rem;
+                    width: 30%;
                     border-radius: 1rem;
                     border: 0;
                 }

@@ -153,7 +153,7 @@ h3 {
 }
 
 .delete-btn {
-  width: 70%;
+  width: 40%;
   background-color: transparent;
   border: 0;
   cursor: pointer;
@@ -244,23 +244,20 @@ footer .opponents-controls {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  flex-grow: 1;
 }
 @media screen and (min-width: 960px) and (max-width: 1550px) {
   footer .opponents-controls {
-    max-width: 1000px;
+    max-width: 960px;
     width: 100%;
     margin: 5rem;
-    flex-grow: 2;
   }
 }
 @media screen and (min-width: 1550px) {
   footer .opponents-controls {
-    max-width: 1000px;
+    max-width: 960px;
     width: 100%;
     flex-direction: row;
     justify-content: space-evenly;
-    flex-grow: 2;
   }
 }
 footer .opponents-controls img {
@@ -329,6 +326,7 @@ footer .gameplay .your-player__fight-controls {
 footer .gameplay .your-player__fight-controls select {
   padding: 0.5rem;
   margin-bottom: 2rem;
+  width: 30%;
   border-radius: 1rem;
   border: 0;
 }
