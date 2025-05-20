@@ -824,11 +824,118 @@ potionBtn.addEventListener("click", function (e) {
 })
 
 
-// todo: créer un délai aux contre-attaques
 // todo: changer la dispo? faire une maquette
+    // Refaire une base html et css solide
+    // Permettre le choix des contre-attaques (magiques, phyisques ou spéciales)
+    // Ajouter un Dexterity/Precision et armure (indice éviter, indice résister) pour améliorer les formules d'attaque
     // Créer des boss sélectionnables dans les defender avec des attaques spéciales
-    // Générer automatiquement un nombre aléatoire pour la force et la magie => l'afficher avec ??? pour laisser le mystère
-    // Choisir son symbole à la place des races
-    // Créer des attaques spéciales limitées (exemple avec attaques magiques => feu, eau, vent, terre ou nom d'attaque pour le fun - Coup de grâce, coup virevoltant) liée à la race?
-    // Faire des héros précongifurés (classe : warrior, magician, druid?)
+    // Créer des attaques spéciales limitées pour chaque classe + ajouter dans select (base 30; 0.5 chance de coup critique)
+    // Mieux gérer la barre de vie et la vitality (hp/totalHp + barre de vie devant?
     // Créer une animation combat (strength & magic)? => une autre fois peut-être
+    // Enable combat 3 héros vs 1 super boss (hp*2, chance de coup critique ↗️, 2 spéciales)
+    // Améliorer l'interface utilisateur
+
+    // ? Classe: Base de 10 points de stats, mana 40, potions 2
+    // ==== Warrior ====
+    // const warrior = {
+    //  strength: "+5",
+    //  magic: "-1",
+    //  mana: "0",
+    //  hp: "+20",
+    //  armour: "5",
+    //  dexterity: "0",
+    //  potions: "0",
+    //  special: "30"
+    // };
+    //* HpBar
+    //* HpMana
+    //* Nom de la spéciale: "Overpower"
+    // ==== Mage ====
+    // const mage = {
+    //  strength: "-1",
+    //  magic: "+5",
+    //  mana: "+60",
+    //  hp: "0",
+    //  armour: "0",
+    //  dexterity: "5",
+    //  potions: "0",
+    //  special: "30"
+    // };
+    //* HpBar
+    //* HpMana
+    //* Nom de la spéciale: "Dragon's blaze"
+    // ==== Battlemage ====
+    // const battlemage = {
+    //  strength: "+3",
+    //  magic: "+3",
+    //  mana: "+20",
+    //  hp: "+10",
+    //  armour: "3",
+    //  dexterity: "2",
+    //  potions: "0",
+    //  special: "30"
+    // };
+    //* HpBar
+    //* HpMana
+    //* Nom de la spéciale: "Divine sword"
+    // ==== Cleric ====
+    // const cleric = {
+    //  strength: "+3",
+    //  magic: "+3",
+    //  mana: "0",
+    //  hp: "0",
+    //  armour: "2",
+    //  dexterity: "3",
+    //  potions: "+2",
+    //  special: "30"
+    // };
+    //* HpBar
+    //* HpMana
+    //* Nom de la spéciale: "Absolution"
+
+    // ? Boss
+    // ==== Boss1 : Norbert le preu (class Cleric) ====
+    // const clericBoss = {
+    //  strength: "+5",
+    //  magic: "+5",
+    //  mana: "+40",
+    //  hp: "+100",
+    //  armour: "2",
+    //  dexterity: "+3",
+    //  potions: "+2",
+    //  special: "30"
+    // };
+    //* HpBar
+    //* HpMana
+    //* Nom de la spéciale: "Absolution"
+    //* Nom de la spéciale: "Palm of heaven, destroyer of hell"
+    // ==== Boss2 : Haki (class warrior)
+    // const warriorBoss = {
+    //  strength: "+10",
+    //  magic: "0",
+    //  mana: "0",
+    //  hp: "+120",
+    //  armour: "5",
+    //  dexterity: "0",
+    //  potions: "0",
+    //  special: "30"
+    // };
+    //* HpBar
+    //* HpMana
+    //* Nom de la spéciale: "Overpower"
+    //* Nom de la spéciale: "Wind sword"
+    // ==== Boss3 : Zuwyn (class mage) ====
+    // const mageBoss = {
+    //  strength: "0",
+    //  magic: "+10",
+    //  mana: "+100",
+    //  hp: "+100",
+    //  armour: "0",
+    //  dexterity: "5",
+    //  potions: "0",
+    //  special: "30"
+    // };
+    //* HpBar
+    //* HpMana
+    //* Nom de la spéciale: "Dragon's blaze"
+    //* Nom de la spéciale: "Ice storm"
