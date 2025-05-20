@@ -60,7 +60,7 @@ class Knight {
 
         const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (defender.hp / 100) * 100;
-        hpBar.style.width = `${hpPercentage}%`;
+        hpBar.style.width = `${hpPercentage*2}px`;
 
         // Mettre à jour les dialogues
         if (totalDamage === 0) {
@@ -103,7 +103,7 @@ class Knight {
 
         const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (attacker.hp/100) * 100;
-        hpBar.style.width = `${hpPercentage}%`;
+        hpBar.style.width = `${hpPercentage*2}px`;
 
         // Mettre à jour les dialogues
         if (totalDamage === 0) {
@@ -149,7 +149,7 @@ class Knight {
 
         const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (defender.hp / 100) * 100;
-        hpBar.style.width = `${hpPercentage}%`;
+        hpBar.style.width = `${hpPercentage*2}px`;
 
         yourPlayerCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${attacker.mana}</div>`;
 
@@ -201,7 +201,7 @@ class Knight {
 
         const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
         const hpPercentage = (attacker.hp/100)*100;
-        hpBar.style.width = `${hpPercentage}%`;
+        hpBar.style.width = `${hpPercentage*2}px`;
 
         yourEnnemyCard.querySelector(".character-card__mana").innerHTML = `<div>🔮 Mana :</div> <div>${defender.mana}</div>`;
 
@@ -241,7 +241,7 @@ class Knight {
             yourPlayerCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> ${this.hp}`;
             const hpBar = yourPlayerCard.querySelector(".character-card__hp-bar-bg-green");
             const hpPercentage = (this.hp/100)*100;
-            hpBar.style.width = `${hpPercentage}%`;
+            hpBar.style.width = `${hpPercentage*2}px`;
 
         } else if (!isAttacker && this.potions > 0) {
             this.potions -= 1;
@@ -252,7 +252,7 @@ class Knight {
             yourEnnemyCard.querySelector(".character-card__hp").innerHTML = `<div>❤️ Vitality :</div> ${this.hp}`;
             const hpBar = yourEnnemyCard.querySelector(".character-card__hp-bar-bg-green");
             const hpPercentage = (this.hp / 100) * 100;
-            hpBar.style.width = `${hpPercentage}%`;
+            hpBar.style.width = `${hpPercentage*2}px`;
         }
     }
 }
@@ -598,7 +598,7 @@ function displayOptionKnight(knight, element) {
     const hpBar = divCardHpBarGreen;
     const hpPercentage = Math.min((knight.hp / 100) * 100, 100);
     
-    hpBar.style.width = `${hpPercentage}%`;
+    hpBar.style.width = `${hpPercentage*2}px`;
 
     // Ajouter les div à l'élément (ordre affichage)
     divCardHpBar.append(divCardHpBarGreen);
